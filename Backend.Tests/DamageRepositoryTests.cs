@@ -1,4 +1,5 @@
 ﻿using Backend.Data.Contexts;
+using Backend.Data.Interfaces;
 using Backend.Data.Repositories;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
+
+namespace Backend.Tests;
 
 public class DamageRepositoryTests : IDisposable {
     private readonly ApplicationDbContext _context;
@@ -96,17 +99,10 @@ public class DamageRepositoryTests : IDisposable {
     }
 
     [Fact]
-    public void CreateDamage_HandlesException() {
-        _context.Database.EnsureDeleted();
-        var newDamage = new Damage {
-            ID = 4,
-            Description = "The Largest pothole",
-            Type = DamageType.Pothole,
-            Location = new Location { Street = "fourth St", StreetNumber = "789", ZipCode = 78932, City = "Tuttlingen" }
-        };
-
-        var result = _repository.CreateDamage(newDamage);
-        Assert.Null(result);
+    public void CreateDamage_NullDamage_ThrowsArgumentNullException() {
+        // Assert
+        var exception = Assert.Throws<ArgumentNullException>(() => _repository.CreateDamage(null));
+        Assert.Equal("damage", exception.ParamName);
     }
 
     // Test for UpdateDamage
@@ -121,7 +117,15 @@ public class DamageRepositoryTests : IDisposable {
         _repository.UpdateDamage(updateDamage);
 
         var updatedEntity = _context.Set<Damage>().Find(1);
-        Assert.Equal(updateDamage, updatedEntity);
+
+        // Because the Reference of both objects is different, we need to compare the properties
+        Assert.NotNull(updatedEntity);
+        Assert.Equal(updateDamage.Description, updatedEntity.Description);
+        Assert.Equal(updateDamage.Type, updatedEntity.Type);
+        Assert.Equal(updateDamage.Location.Street, updatedEntity.Location.Street);
+        Assert.Equal(updateDamage.Location.StreetNumber, updatedEntity.Location.StreetNumber);
+        Assert.Equal(updateDamage.Location.ZipCode, updatedEntity.Location.ZipCode);
+        Assert.Equal(updateDamage.Location.City, updatedEntity.Location.City);
     }
 
     [Fact]

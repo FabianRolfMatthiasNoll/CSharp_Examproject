@@ -17,7 +17,7 @@ namespace Backend.Controllers {
         {
             _damageRepository = damageRepository;
         }
-
+        //TODO: Rename all methods to better names
         [HttpGet]
         public ActionResult<IEnumerable<Damage>> GetAllDamages() {
             try {

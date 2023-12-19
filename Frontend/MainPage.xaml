@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:Frontend.Services"
+             x:Class="Frontend.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <services:EnumToStringConverter x:Key="EnumToStringConverter"/>
+            <services:LocationToStringConverter x:Key="LocationToStringConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollView VerticalOptions="FillAndExpand" Grid.Row="0">
+            <VerticalStackLayout Padding="30,0" Spacing="25">
+
+                <!-- Damage List -->
+                <ListView x:Name="EmployeeListView" SelectedItem="{Binding SelectedDamage}" ItemsSource="{Binding Damages}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Vertical" Padding="10">
+                                    <!-- Damage Details -->
+                                    <Label Text="{Binding Description}" FontSize="Medium" FontAttributes="Bold"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontSize="Small">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Type: " />
+                                                    <Span Text="{Binding Type, Converter={StaticResource EnumToStringConverter}}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontSize="Small">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Location: " />
+                                                    <Span Text="{Binding Location, Converter={StaticResource LocationToStringConverter}}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Grid.Row="1">
+            <Button x:Name="AddButton" Text="Report Damage" Command="{Binding AddCommand}" WidthRequest="300" HeightRequest="50" Margin="0,0,0,10"/>
+            <Button x:Name="DeleteButton" Text="Delete Damage" Command="{Binding DeleteCommand}" WidthRequest="300" HeightRequest="50" Margin="0,0,0,10"/>
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

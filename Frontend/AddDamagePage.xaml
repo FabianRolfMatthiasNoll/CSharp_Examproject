@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:services="clr-namespace:Frontend.Services"
+             x:Class="Frontend.AddDamagePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <services:EnumToIntConverter x:Key="EnumToIntConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid Padding="20" RowSpacing="10">
+            <!-- Grid Rows Definition -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Description Input -->
+            <Entry Grid.Row="0" Text="{Binding Damage.Description}" Placeholder="Description" />
+
+            <!-- DamageType Dropdown -->
+            <Picker Grid.Row="1" SelectedIndex="{Binding Damage.Type, Converter={StaticResource EnumToIntConverter}}"
+                    Title="Select Damage Type">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Street Lamp</x:String>
+                        <x:String>Pothole</x:String>
+                        <x:String>Other</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <!-- Location Inputs -->
+            <Entry Grid.Row="2" Text="{Binding Damage.Location.Street}" Placeholder="Street" />
+            <Entry Grid.Row="3" Text="{Binding Damage.Location.StreetNumber}" Placeholder="Street Number" />
+            <Entry Grid.Row="4" Text="{Binding Damage.Location.ZipCode}" Placeholder="Zip Code" Keyboard="Numeric"/>
+            <Entry Grid.Row="5" Text="{Binding Damage.Location.City}" Placeholder="City" />
+
+            <!-- Buttons Container -->
+            <StackLayout Grid.Row="6" Orientation="Horizontal" HorizontalOptions="Start" Spacing="10">
+                <!-- Submit and Cancel Buttons -->
+                <Button Text="OK" Command="{Binding OKCommand}" 
+                        WidthRequest="{OnPlatform iOS='90', Android='90', WinUI='100'}"
+                        HeightRequest="{OnPlatform iOS='50', Android='50', WinUI='60'}"/>
+                <Button Text="Cancel" Command="{Binding CancelCommand}" 
+                        WidthRequest="{OnPlatform iOS='90', Android='90', WinUI='100'}"
+                        HeightRequest="{OnPlatform iOS='50', Android='50', WinUI='60'}"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

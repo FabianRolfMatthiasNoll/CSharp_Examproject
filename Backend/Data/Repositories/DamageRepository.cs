@@ -28,15 +28,16 @@ public class DamageRepository : IDamageRepository
 
     public Damage CreateDamage(Damage damage)
     {
-        _damageSet.Add(damage);
-        try
-        {
+        if (damage == null) {
+            throw new ArgumentNullException(nameof(damage));
+        }
+
+        try {
+            _damageSet.Add(damage);
             _dbContext.SaveChanges();
             return damage;
-        }
-        catch (Exception)
-        {
-            return null;
+        } catch (Exception ex) {
+            throw new InvalidOperationException("Error occurred while creating damage.", ex);
         }
     }
 
