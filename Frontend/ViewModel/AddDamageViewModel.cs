@@ -1,6 +1,9 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+using Frontend.Models;
+using Frontend.Services;
+using Location = Frontend.Models.Location;
 
 namespace Frontend.ViewModel;
 
@@ -44,53 +47,11 @@ public class AddDamageViewModel : ViewModelBase
         Shell.Current.GoToAsync("..");
     }
 
-    private bool ValidateForm() {
-        StringBuilder validationErrors = new StringBuilder();
-
-        if (string.IsNullOrWhiteSpace(Damage.Description)) {
-            validationErrors.AppendLine("Description cannot be empty.");
-        }
-
-        if (string.IsNullOrWhiteSpace(Damage.Location.Street)) {
-            validationErrors.AppendLine("Street is required.");
-        }
-
-        if (string.IsNullOrWhiteSpace(Damage.Location.StreetNumber)) {
-            validationErrors.AppendLine("Street number is required.");
-        }
-
-        if (string.IsNullOrWhiteSpace(Damage.Location.City)) {
-            validationErrors.AppendLine("City is required.");
-        }
-
-        if (Damage.Location.ZipCode == 0) {
-            validationErrors.AppendLine("Zip code is required.");
-        }
-
-        if (Damage.Location.Street != null)
-        {
-            if (Regex.IsMatch(Damage.Location.Street, @"\d")) {
-                validationErrors.AppendLine("Street should not contain numbers.");
-            }
-        }
-
-        if (Damage.Location.StreetNumber != null) {
-
-            if (!Regex.IsMatch(Damage.Location.StreetNumber, @"^\d")) {
-                validationErrors.AppendLine("Street number must start with a number.");
-            }
-        }
-
-        if (Damage.Location.City != null) {
-
-            if (Regex.IsMatch(Damage.Location.City, @"\d")) {
-                validationErrors.AppendLine("City should not contain numbers.");
-            }
-        }
-
-        ErrorMessage = validationErrors.ToString();
-
-        return string.IsNullOrEmpty(ErrorMessage);
+    private bool ValidateForm()
+    {
+        var Validation = ValidatorHelper.ValidateDamage(Damage);
+        ErrorMessage = Validation.errorMessage;
+        return Validation.result;
     }
 
 

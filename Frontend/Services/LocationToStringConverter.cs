@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using Location = Frontend.Models.Location;
 
 namespace Frontend.Services;
 

@@ -1,9 +1,17 @@
 ﻿namespace Frontend.Models;
 
-public class Damage
+public partial class Damage
 {
-    public int Id { get; set; }
-    public string Description { get; set; }
-    public DamageType Type { get; set; }
-    public Location Location { get; set; }
+    public override bool Equals(object obj) {
+        if (obj is Damage other) {
+            return Description == other.Description
+                   /*&& Type == other.Type*/
+                   && Location.Equals(other.Location);
+        }
+        return false;
+    }
+
+    public override int GetHashCode() {
+        return HashCode.Combine(Description, Type, Location);
+    }
 }

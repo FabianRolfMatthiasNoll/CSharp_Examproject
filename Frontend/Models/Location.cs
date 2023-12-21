@@ -1,8 +1,18 @@
 ﻿namespace Frontend.Models;
-public class Location
+
+public partial class Location
 {
-    public string Street { get; set; }
-    public string StreetNumber { get; set; }
-    public int ZipCode { get; set; }
-    public string City { get; set; }
+    public override bool Equals(object obj) {
+        if (obj is Location other) {
+            return Street == other.Street
+                   && StreetNumber == other.StreetNumber
+                   && ZipCode == other.ZipCode
+                   && City == other.City;
+        }
+        return false;
+    }
+
+    public override int GetHashCode() {
+        return HashCode.Combine(Street, StreetNumber, ZipCode, City);
+    }
 }

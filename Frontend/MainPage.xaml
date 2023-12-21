@@ -14,50 +14,73 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
 
-        <ScrollView VerticalOptions="FillAndExpand" Grid.Row="0">
-            <VerticalStackLayout Padding="30,0" Spacing="25">
-
-                <!-- Damage List -->
-                <ListView x:Name="EmployeeListView" SelectedItem="{Binding SelectedDamage}" ItemsSource="{Binding Damages}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Orientation="Vertical" Padding="10">
-                                    <!-- Damage Details -->
-                                    <Label Text="{Binding Description}" FontSize="Medium" FontAttributes="Bold"/>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label FontSize="Small">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Text="Type: " />
-                                                    <Span Text="{Binding Type, Converter={StaticResource EnumToStringConverter}}" />
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label FontSize="Small">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Text="Location: " />
-                                                    <Span Text="{Binding Location, Converter={StaticResource LocationToStringConverter}}" />
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
-                                    </StackLayout>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-
-            </VerticalStackLayout>
+        <!-- Main Content -->
+        <ScrollView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand">
+            <ListView x:Name="EmployeeListView" SelectedItem="{Binding SelectedDamage}" ItemsSource="{Binding Damages}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Vertical" Padding="10">
+                            <!-- Damage Details -->
+                            <Label Text="{Binding Description}" FontSize="Medium" FontAttributes="Bold"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Label FontSize="Small">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Type: " />
+                                            <Span Text="{Binding Type, Converter={StaticResource EnumToStringConverter}}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label FontSize="Small">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Location: " />
+                                            <Span Text="{Binding Location, Converter={StaticResource LocationToStringConverter}}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            </ListView>
         </ScrollView>
-        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10" Grid.Row="1">
-            <Button x:Name="AddButton" Text="Report Damage" Command="{Binding AddCommand}" WidthRequest="300" HeightRequest="50" Margin="0,0,0,10"/>
-            <Button x:Name="DeleteButton" Text="Delete Damage" Command="{Binding DeleteCommand}" WidthRequest="300" HeightRequest="50" Margin="0,0,0,10"/>
-        </HorizontalStackLayout>
+        <ScrollView Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand">
+            <ListView x:Name="ErrorListView" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding ErrorMessages}" BackgroundColor="#88FF0000" IsVisible="{Binding HasErrors}" VerticalOptions="FillAndExpand" HorizontalOptions="End" WidthRequest="200">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding .}" TextColor="White"/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
+
+        <!-- Top Right - Reload Button -->
+        <Button x:Name="ReloadButton" Grid.Row="0" Grid.Column="1" Text="&#x21bb;" Command="{Binding ReloadCommand}" VerticalOptions="Start" HorizontalOptions="End" Margin="0,-35,10,0"/>
+
+        <!-- Bottom Left - Report and Delete Buttons -->
+        <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Start" Spacing="10" >
+            <Button x:Name="AddButton" Text="Report Damage" Command="{Binding AddCommand}" Margin="10,0,0,10"/>
+            <Button x:Name="DeleteButton" Text="Delete Damage" Command="{Binding DeleteCommand}" Margin="0,0,0,10"/>
+        </StackLayout>
+
+        <!-- Bottom Right - Import and Export Buttons -->
+        <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalOptions="End" Spacing="10">
+            <Button x:Name="ExportButton" Text="Export" Command="{Binding ExportCommand}" Margin="0,0,0,10"/>
+            <Button x:Name="ImportButton" Text="Import" Command="{Binding ImportCommand}" Margin="0,0,10,10"/>
+        </StackLayout>
     </Grid>
 </ContentPage>
