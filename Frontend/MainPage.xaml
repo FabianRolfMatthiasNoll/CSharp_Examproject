@@ -14,7 +14,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -57,19 +56,22 @@
             </ListView>
         </ScrollView>
         <ScrollView Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand">
-            <ListView x:Name="ErrorListView" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding ErrorMessages}" BackgroundColor="#88FF0000" IsVisible="{Binding HasErrors}" VerticalOptions="FillAndExpand" HorizontalOptions="End" WidthRequest="200">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Label Text="{Binding .}" TextColor="White"/>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <Frame CornerRadius="20" Padding="10" BackgroundColor="#88FF0000" IsVisible="{Binding HasErrors}" Margin="0,20,10,20">
+                <ListView x:Name="ErrorListView" ItemsSource="{Binding Errors}" VerticalOptions="FillAndExpand" HorizontalOptions="End" WidthRequest="300">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Label Text="{Binding .}" TextColor="White" Padding="10"/>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
         </ScrollView>
 
+
         <!-- Top Right - Reload Button -->
-        <Button x:Name="ReloadButton" Grid.Row="0" Grid.Column="1" Text="&#x21bb;" Command="{Binding ReloadCommand}" VerticalOptions="Start" HorizontalOptions="End" Margin="0,-35,10,0"/>
+        <Button x:Name="ReloadButton" Grid.Row="0" Grid.Column="1" Text="&#x21bb;" Command="{Binding ReloadCommand}" VerticalOptions="Start" HorizontalOptions="End" Margin="0,-35,20,0"/>
 
         <!-- Bottom Left - Report and Delete Buttons -->
         <StackLayout Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalOptions="Start" Spacing="10" >

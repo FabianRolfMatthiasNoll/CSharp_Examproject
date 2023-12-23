@@ -49,7 +49,7 @@ namespace Backend.Controllers {
 
             try {
                 var createdDamage = _damageRepository.CreateDamage(damage);
-                return CreatedAtAction(nameof(GetDamageById), new { id = createdDamage.ID }, createdDamage);
+                return Ok(createdDamage);
             } catch (Exception ex) {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
@@ -62,7 +62,7 @@ namespace Backend.Controllers {
                 if (!success) {
                     return NotFound($"Damage with ID {id} not found.");
                 }
-                return NoContent();
+                return Ok();
             } catch (Exception ex) {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }

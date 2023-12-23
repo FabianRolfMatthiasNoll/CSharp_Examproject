@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui.Storage;
+﻿using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Storage;
 using Frontend.Models;
 using Frontend.ViewModel;
 using Microsoft.Extensions.Logging;
@@ -24,6 +25,7 @@ namespace Frontend {
 
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts => {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");

@@ -7,18 +7,14 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Use Autofac as the DI container
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
-// This is where you register Autofac modules or directly register services
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder => {
-    // Register your types here
     containerBuilder.RegisterType<ApplicationDbContext>()
-        .AsSelf() // Register as itself
+        .AsSelf()
         .InstancePerLifetimeScope();
-    // Register DamageRepository as an implementation of IDamageRepository
     containerBuilder.RegisterType<DamageRepository>()
-        .As<IDamageRepository>() // Register as the interface
+        .As<IDamageRepository>()
         .InstancePerLifetimeScope();
 });
 

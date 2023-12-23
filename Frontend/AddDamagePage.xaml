@@ -3,7 +3,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:services="clr-namespace:Frontend.Services"
-             x:Class="Frontend.AddDamagePage">
+             x:Class="Frontend.AddDamagePage"
+             Title="Damage Report">
     <ContentPage.Resources>
         <ResourceDictionary>
             <services:EnumToIntConverter x:Key="EnumToIntConverter"/>
@@ -11,7 +12,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Grid Padding="20" RowSpacing="10">
+        <Grid Padding="10" RowSpacing="10">
             <!-- Grid Rows Definition -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -20,6 +21,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
@@ -45,14 +47,10 @@
             <Entry Grid.Row="5" Text="{Binding Damage.Location.City}" Placeholder="City" />
 
             <!-- Buttons Container -->
-            <StackLayout Grid.Row="6" Orientation="Horizontal" HorizontalOptions="Start" Spacing="10">
+            <StackLayout Grid.Row="7" Orientation="Horizontal" HorizontalOptions="Start" Spacing="10">
                 <!-- Submit and Cancel Buttons -->
-                <Button Text="OK" Command="{Binding OKCommand}" 
-                        WidthRequest="{OnPlatform iOS='90', Android='90', WinUI='100'}"
-                        HeightRequest="{OnPlatform iOS='50', Android='50', WinUI='60'}"/>
-                <Button Text="Cancel" Command="{Binding CancelCommand}" 
-                        WidthRequest="{OnPlatform iOS='90', Android='90', WinUI='100'}"
-                        HeightRequest="{OnPlatform iOS='50', Android='50', WinUI='60'}"/>
+                <Button Text="OK" Command="{Binding OKCommand}"/>
+                <Button Text="Cancel" Command="{Binding CancelCommand}"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

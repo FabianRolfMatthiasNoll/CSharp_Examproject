@@ -1,17 +1,19 @@
-﻿using System.Xml.Serialization;
+﻿using Frontend.Models;
+using System.Collections.ObjectModel;
+using System.Xml.Serialization;
 
 namespace Frontend.Services;
 
 public static class XmlConverter
 {
-    public static void SerializeToXmlFile<T>(T obj, string filePath) {
-        var serializer = new XmlSerializer(typeof(T));
+    public static void SerializeToXmlFile(ObservableCollection<Damage> damageList, string filePath) {
+        var serializer = new XmlSerializer(typeof(ObservableCollection<Damage>));
         using var fileStream = new FileStream(filePath, FileMode.Create);
-        serializer.Serialize(fileStream, obj);
+        serializer.Serialize(fileStream, damageList);
     }
-    public static T DeserializeFromXmlFile<T>(string filepath) {
-        var serializer = new XmlSerializer(typeof(T));
+    public static ObservableCollection<Damage> DeserializeFromXmlFile(string filepath) {
+        var serializer = new XmlSerializer(typeof(ObservableCollection<Damage>));
         using var fileStream = new FileStream(filepath, FileMode.Open);
-        return (T)serializer.Deserialize(fileStream);
+        return (ObservableCollection<Damage>)serializer.Deserialize(fileStream);
     }
 }

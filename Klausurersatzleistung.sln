@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend", "Backend\Backend.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend.Tests", "Backend.Tests\Backend.Tests.csproj", "{BF482DE7-024B-42C3-A541-4FFB3EB42E8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend", "Frontend\Frontend.csproj", "{F5F3A8F6-AF24-4B4A-A3C7-B125323CABC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Frontend", "Frontend\Frontend.csproj", "{F5F3A8F6-AF24-4B4A-A3C7-B125323CABC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend.Tests", "Frontend.Tests\Frontend.Tests.csproj", "{859895A5-31C2-45A8-A5A6-66C5DD41B787}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{F5F3A8F6-AF24-4B4A-A3C7-B125323CABC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5F3A8F6-AF24-4B4A-A3C7-B125323CABC4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F5F3A8F6-AF24-4B4A-A3C7-B125323CABC4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{859895A5-31C2-45A8-A5A6-66C5DD41B787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{859895A5-31C2-45A8-A5A6-66C5DD41B787}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{859895A5-31C2-45A8-A5A6-66C5DD41B787}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{859895A5-31C2-45A8-A5A6-66C5DD41B787}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
